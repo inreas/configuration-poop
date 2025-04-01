@@ -1,0 +1,22 @@
+# Colors
+set {
+    $fg #ebdbb2
+    $bg #282828
+    $red #cc241d
+}
+
+# Gaps
+gaps inner 10
+
+# Border
+default_border pixel 4px
+client.focused $fg $fg $bg $fg $fg
+client.unfocused $bg $bg $fg $bg $bg
+client.urgent $red $red $bg $red $red
+
+# Cursor theme
+seat seat0 xcursor_theme Bibata-Modern-Classic 24
+exec {
+    gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic
+    gsettings set org.gnome.desktop.interface cursor-size 22
+}

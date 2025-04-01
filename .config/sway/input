@@ -1,0 +1,10 @@
+# You can get information about your inputs by running `swaymsg -t get_inputs`
+
+input type:keyboard {
+    # xkb_layout ro
+    xkb_numlock enabled
+}
+
+input type:pointer {
+    pointer_accel -1
+}

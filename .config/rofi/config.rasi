@@ -1,0 +1,26 @@
+configuration {
+    modi: "drun,run,clipboard:~/.config/rofi/scripts/cliphist-rofi.sh,powermenu:~/.config/rofi/scripts/powermenu.lua";
+
+    me-accept-entry: "MousePrimary";
+    me-select-entry: "";
+    show-icons: true;
+    icon-theme: "ePapirus";
+    application-fallback-icon: "run-build";
+
+    terminal: "kitty";
+    drun-display-format: " {name} ";
+    sidebar-mode: true;
+    matching: "fuzzy";
+    scroll-method: 0;
+    disable-history: false;
+
+    display-drun: "󱓞 Apps";
+    display-run: " Run";
+    display-clipboard: " Clipboard";
+    display-powermenu: " Power";
+
+    sort: true;
+    sorting-method: "fzf";
+}
+
+@theme "theme.rasi"

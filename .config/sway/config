@@ -1,0 +1,9 @@
+# Read `man 5 sway` for a complete reference
+
+include ~/.config/sway/appearance
+include ~/.config/sway/autostart
+include ~/.config/sway/input
+include ~/.config/sway/keys
+include ~/.config/sway/output
+include ~/.config/sway/rules
+include /etc/sway/config.d/*

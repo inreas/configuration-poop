@@ -1,0 +1,7 @@
+# You can get information about your outputs by running `swaymsg -t get_outputs`
+
+output DP-1 {
+    mode 3840x2160@165Hz
+    position 2160,0
+    scale 1.5
+}

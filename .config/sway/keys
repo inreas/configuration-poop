@@ -1,0 +1,198 @@
+# Variables
+set {
+    # Super key
+    $mod Mod4
+
+    # Vi keys
+    $left h
+    $down j
+    $up k
+    $right l
+    
+    # Terminal
+    $term kitty
+
+    # Scripts
+    $sway ~/.config/sway/scripts
+
+    # Rofi
+    $apps rofi -show drun
+    $clipboard rofi -show clipboard
+    $powermenu rofi -show powermenu
+
+    # Move and resize steps
+    $move_px 40px
+    $resize_px 40px
+
+    # Workspace names
+    $ws1 1
+    $ws2 2
+    $ws3 3
+    $ws4 4
+    $ws5 5
+    $ws6 6
+    $ws7 7
+    $ws8 8
+    $ws9 9
+    $ws10 10
+
+    # Send a tick to trigger a split indicator update
+    # The $post_split command is added as a suffix to all split keybinds
+    $post_split exec "swaymsg -t send_tick split"
+
+    # Switch to workspace (and focus any urgent clients in it, if they exist)
+    # The $post_workspace_switch command is added as a suffix to all workspace switch keybinds
+    $post_workspace_switch [workspace="__focused__" urgent="first"] focus
+}
+
+# Floating modifier
+# - Drag floating windows by holding down $mod and left mouse button
+# - Resize them by holding down $mod and right mouse button
+# - This also works for non-floating windows
+# Change normal to inverse to use right mouse button for dragging and left mouse button for resizing
+floating_modifier $mod normal
+
+# Global keybinds
+bindsym --to-code {
+    # Start a terminal
+    $mod+Return exec $term
+    
+    # Reload sway
+    $mod+Shift+r reload
+
+    # Focus workspace
+    $mod+1 workspace $ws1; $post_workspace_switch
+    $mod+2 workspace $ws2; $post_workspace_switch
+    $mod+3 workspace $ws3; $post_workspace_switch
+    $mod+4 workspace $ws4; $post_workspace_switch
+    $mod+5 workspace $ws5; $post_workspace_switch
+    $mod+6 workspace $ws6; $post_workspace_switch
+    $mod+7 workspace $ws7; $post_workspace_switch
+    $mod+8 workspace $ws8; $post_workspace_switch
+    $mod+9 workspace $ws9; $post_workspace_switch
+    $mod+0 workspace $ws10; $post_workspace_switch
+
+    # Move focused container to workspace
+    $mod+Shift+1 move container to workspace $ws1
+    $mod+Shift+2 move container to workspace $ws2
+    $mod+Shift+3 move container to workspace $ws3
+    $mod+Shift+4 move container to workspace $ws4
+    $mod+Shift+5 move container to workspace $ws5
+    $mod+Shift+6 move container to workspace $ws6
+    $mod+Shift+7 move container to workspace $ws7
+    $mod+Shift+8 move container to workspace $ws8
+    $mod+Shift+9 move container to workspace $ws9
+    $mod+Shift+0 move container to workspace $ws10
+
+    # Focus and move container to workspace
+    $mod+Ctrl+1 move container to workspace $ws1, workspace $ws1
+    $mod+Ctrl+2 move container to workspace $ws2, workspace $ws2
+    $mod+Ctrl+3 move container to workspace $ws3, workspace $ws3
+    $mod+Ctrl+4 move container to workspace $ws4, workspace $ws4
+    $mod+Ctrl+5 move container to workspace $ws5, workspace $ws5
+    $mod+Ctrl+6 move container to workspace $ws6, workspace $ws6
+    $mod+Ctrl+7 move container to workspace $ws7, workspace $ws7
+    $mod+Ctrl+8 move container to workspace $ws8, workspace $ws8
+    $mod+Ctrl+9 move container to workspace $ws9, workspace $ws9
+    $mod+Ctrl+0 move container to workspace $ws0, workspace $ws10
+
+    # Directional focus
+    $mod+$left focus left
+    $mod+$down focus down
+    $mod+$up focus up
+    $mod+$right focus right
+
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    # Smart focus
+    # - Cycle focus right if current layout is tabbed / splith
+    # - Cycle focus down if current layout is stacked / splitv
+    # - Change focus from floating to tiling layer otherwise
+    $mod+Tab exec $sway/smart-focus-change.sh next
+    # Reverse direction with shift
+    $mod+Shift+Tab exec $sway/smart-focus-change.sh prev
+
+    # Move the current focus, both floating and tiled
+    $mod+Shift+$left move left $move_px
+    $mod+Shift+$down move down $move_px
+    $mod+Shift+$up move up $move_px
+    $mod+Shift+$right move right $move_px
+
+    $mod+Shift+Left move left $move_px
+    $mod+Shift+Down move down $move_px
+    $mod+Shift+Up move up $move_px
+    $mod+Shift+Right move right $move_px
+
+    # Resize the current focus
+    $mod+Ctrl+$left resize shrink width $resize_px
+    $mod+Ctrl+$down resize grow height $resize_px
+    $mod+Ctrl+$up resize shrink height $resize_px
+    $mod+Ctrl+$right resize grow width $resize_px
+
+    $mod+Ctrl+Left resize shrink width $resize_px
+    $mod+Ctrl+Down resize grow height $resize_px
+    $mod+Ctrl+Up resize shrink height $resize_px
+    $mod+Ctrl+Right resize grow width $resize_px
+
+    # Smart split
+    # Will either splith or splitv depending on which container container side is largest
+    $mod+x exec $sway/smart-split.sh, $post_split
+    # Toggle splith/splitv with the same key
+    $mod+s layout toggle split, $post_split
+    # Switch between splith/splitv for new windows
+    $mod+b splith
+    $mod+v splitv
+
+    # Make the current focus fullscreen
+    $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    $mod+Shift+space floating toggle
+    # Swap focus between the tiling area and the floating area
+    $mod+space focus mode_toggle
+
+    # Scratchpad
+    # - Sway has a "scratchpad", which is a bag of holding for windows
+    # - You can send windows there and get them back later
+    # Move the currently focused window to the scratchpad
+    $mod+Shift+minus move scratchpad
+    # Show the next scratchpad window or hide the focused scratchpad window
+    # If there are multiple scatchpad windows, this command cycles through them
+    $mod+minus scratchpad show
+
+    # Move focus to the parent container
+    $mod+a focus parent
+    # Move focus to the child container
+    $mod+shift+a focus child
+
+    # Close the current focus
+    $mod+shift+q kill
+
+    # Make current focus sticky
+    $mod+g sticky toggle
+
+    # Exit session
+    $mod+Shift+z exec swaymsg exit
+
+    # Rofi
+    $mod+d exec $apps
+    $mod+e exec $clipboard
+    $mod+q exec $powermenu
+
+    # Notifications
+    $mod+n exec dunstctl close-all
+    $mod+Shift+n exec dunstctl close
+    $mod+Ctrl+n exec dunstctl context
+
+    # Screenshots
+    Print exec $sway/screenshot-region.sh
+    Shift+Print exec $sway/screenshot-window.sh
+    Ctrl+Print exec $sway/screenshot-screen.sh
+
+    # Swap containers with yank and paste
+    $mod+Shift+y [con_mark="_swapy"] unmark "_swapy"; mark --add "_swapy"
+    $mod+Shift+p swap container with mark "_swapy"; [con_mark="_swapy"] focus; unmark "_swapy"
+}

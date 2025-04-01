@@ -1,0 +1,21 @@
+# Run with every reload
+exec_always {
+}
+
+# Run once on login
+exec {
+    # Pipewire
+    systemctl --user start pipewire.service
+    systemctl --user start pipewire-pulse.service
+    systemctl --user start wireplumber.service
+
+    # Wallpaper
+    swaybg -i Pictures/Wallpapers/nature.png
+
+    # Clipboard
+    wl-paste --type text --watch cliphist store
+    wl-paste --type image --watch cliphist store
+}
+
+# Bar
+bar swaybar_command waybar

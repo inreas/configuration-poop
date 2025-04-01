@@ -1,0 +1,22 @@
+# Sticky windows
+for_window {
+}
+
+# Floating windows
+for_window {
+    [class="^steam$"] floating enable
+    [app_id="vesktop"] floating enable
+    [app_id="pavucontrol"] floating enable
+}
+
+# Automatically close windows
+for_window {
+    [class="^steam$" title="^Steam - News$"] kill
+}
+
+# Assign apps to workspaces
+assign {
+}
+
+# Mouse rules
+focus_follows_mouse no
